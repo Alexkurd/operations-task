@@ -22,6 +22,13 @@ Some general points:
 
 ## Practical case: Deployable development environment
 
+### Solutions
+
+Local development is based on docker. The command will run 2 containers: Postgresql:13.5 and python 3.10. On first launch Postgresql will import `db/*.sql` files. Connection credentials are used from environment with fallback to the file `config.py`. 
+```
+docker compose up
+```
+
 ### Premise
 
 Provided are two simplified parts of the same application environment: A database dump and an API service. Your task is to automate setting up the development environment in a reliable and testable manner using "infrastructure as code" principles.

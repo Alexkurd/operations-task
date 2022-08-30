@@ -1,4 +1,4 @@
-import psycopg2
+import psycopg2, os
 from datetime import datetime
 
 from flask import Flask, request, jsonify
@@ -12,9 +12,10 @@ def get_db_conn(db_config):
     """ Create a database connection. """
     return psycopg2.connect(
         "dbname='{}' user='{}' host='{}'".format(
-            db_config["name"],
-            db_config["user"],
-            db_config["host"]
+            os.environ.get('RDS_NAME', db_config["name"]),
+            os.environ.get('RDS_USER', db_config["user"]),
+            os.environ.get('RDS_HOST', db_config["host"]),
+            os.environ.get('RDS_PASS', db_config["pass"]),
         )
     )
 
